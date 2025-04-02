@@ -14,7 +14,7 @@ console.log(secondBurger.name ); // ?
 Senza lanciare il codice, riesci a prevedere cosa viene stampato in console?
 
 console.log(hamburger.name); // ?  'Double Cheese Burger'
-console.log(secondBurger.name ); // ? 500
+console.log(secondBurger.name ); // ? 'Double Cheese Burger'
 
 Quanti oggetti sono stati creati in memoria durante l'esecuzione di questo codice?
 
@@ -47,7 +47,7 @@ console.log(secondBurger.ingredients[0]); // ?  "Salad"
 
 Quanti oggetti sono stati creati in memoria durante l'esecuzione di questo codice?
 
-Sono stati creati due oggetti in memoria, uno per ogni variabile assegnata.
+Sono stati creati due oggetti in memoria ma con un solo array in memoria, uno per ogni variabile assegnata.
 */
 
 
@@ -75,7 +75,7 @@ const thirdBurger = structuredClone(hamburger);
 
 Quanti oggetti sono stati creati in memoria durante l'esecuzione di questo codice?
 
-Sono stati creati 3 oggetti in memoria, uno per ogni variabile assegnata, con le relative proprietà annidate.
+Sono stati creati 3 oggetti in memoria ognuno dei quali contengono altri 3 oggetti a loro volta, con le relative proprietà annidate.
 */
 
 
@@ -150,12 +150,12 @@ Senza lanciare il codice, riesci a prevedere cosa viene stampato in console?
 
 console.log(hamburger.maker.name); // ?  "Chef Hyur"
 console.log(secondBurger.maker.name); // ?  "Chef Hyur"
-console.log(hamburger.maker.restaurant.name); // ?  "Hyur's Burgers"
+console.log(hamburger.maker.restaurant.name); // ?  "Hyur's II"
 console.log(secondBurger.maker.restaurant.name); // ? "Hyur's II"
 
 Quanti oggetti sono stati creati in memoria durante l'esecuzione di questo codice?
 
-Sono stati creati 3 oggetti in memoria, uno per ogni variabile assegnata con le relative proprietà annidate.
+Sono stati creati 5 oggetti in memoria, uno per ogni variabile assegnata con le relative proprietà annidate.
 */
 
 
@@ -188,7 +188,7 @@ const chef = {
 
 Qual è il metodo migliore per clonare l’oggetto chef, e perché?
 
-Il metodo migliore per clonare l'oggetto chef è lo spread perchè quest'ultimo contiene proprietà annidate e delle funzioni.
+Il metodo migliore per clonare l'oggetto chef è fare più spread annidati perchè l'oggetto contiene proprietà e oggetti annidati e delle funzioni.
 */
 
 
@@ -219,5 +219,23 @@ const chef = {
         isOpen: true,
     }
 }
+
+function deepCopy (obj) {
+  if (typeof obj !== 'object'){
+    return obj;
+  }
+
+  const copy = {};
+  for (let key in obj){
+    const value = obj [key]
+    if (typeof value === 'object'){
+      copy[key] = value;
+    } else {
+       copy[key] = deepCopy(value);
+      }
+  }    
+}
+
+const chefCopy = deepCopy(chef);
 
 */
